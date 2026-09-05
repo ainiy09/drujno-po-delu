@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="12 проектов некоммерческих организаций Ленинградской области, открытых к поддержке бизнеса." />
+  <title>Проекты НКО × Бизнес</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="В начало">
+      <span class="brand-mark">47</span>
+      <span>НКО × Бизнес</span>
+    </a>
+    <button class="shortlist-button" id="shortlistButton" type="button" aria-pressed="false">
+      Мой выбор <span id="shortlistCount">0</span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow">Ленинградская область · 2026</p>
+        <h1>12 проектов, которым<br />нужен сильный партнёр</h1>
+        <p class="lead">Выберите инициативу, близкую ценностям вашей компании. Здесь — суть проекта, территория, бюджет и конкретная польза партнёрства.</p>
+      </div>
+      <div class="intro-note">
+        <span class="note-number">12</span>
+        <span>инициатив в социальной сфере, культуре, образовании, спорте и развитии территорий</span>
+      </div>
+    </section>
+
+    <section class="catalog" aria-labelledby="catalogTitle">
+      <div class="catalog-head">
+        <div>
+          <p class="eyebrow">Каталог инициатив</p>
+          <h2 id="catalogTitle">Найдите свой проект</h2>
+        </div>
+        <label class="search">
+          <span class="sr-only">Поиск по проектам</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="searchInput" type="search" placeholder="Название, территория, тема…" />
+        </label>
+      </div>
+      <div class="filters" id="filters" aria-label="Фильтр по направлениям"></div>
+      <p class="results-meta" id="resultsMeta"></p>
+      <div class="project-grid" id="projectGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить запрос или выбрать другое направление.</p>
+        <button type="button" id="resetButton">Сбросить фильтры</button>
+      </div>
+    </section>
+
+    <section class="closing">
+      <p class="eyebrow">Партнёрство с результатом</p>
+      <h2>Поддержка может быть финансовой, ресурсной или экспертной</h2>
+      <p>Откройте карточку проекта, изучите материалы и свяжитесь с командой напрямую. Добавляйте интересные инициативы в «Мой выбор», чтобы сравнить их.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Проекты НКО Ленинградской области</span>
+    <span>Информация предоставлена авторами проектов</span>
+  </footer>
+
+  <div class="modal" id="projectModal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <article class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>
+      <div id="modalContent"></div>
+    </article>
+  </div>
+
+  <script src="images.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
