@@ -13,6 +13,25 @@ const projects = [
   {id:12,title:'Лошадь в истории — история лошади',org:'ЛООО «Конно-спортивный клуб “Новополье”»',category:'Образование',territory:'д. Новополье, Ломоносовский район',budget:978952,summary:'Интерактивные экскурсии для младших школьников, соединяющие историю, творчество и безопасное общение с лошадьми.',description:'Ученики 3–5 классов Ломоносовского района смогут проводить полезный образовательно-познавательный досуг в конно-спортивном клубе: узнавать историю через живое взаимодействие с лошадью, участвовать в арт-терапии и совместном чаепитии.',benefit:'Партнёр поддерживает доступный познавательный досуг детей и развитие локальной площадки. Возможны финансирование групп, благоустройство территории, помощь кормами и корпоративные волонтёрские дни.',costs:'Команда и страховые взносы — 313 952 ₽; материалы для благоустройства и корма — 351 000 ₽; чаепития — 86 000 ₽; аренда спецтехники — 84 000 ₽; ипповент — 80 000 ₽; арт-терапевт — 64 000 ₽.',post:'https://vk.ru/wall-3307486_12019',presentation:'https://disk.yandex.ru/i/4UEykKdpSdYjaA',media:['https://disk.yandex.ru/i/GMwl21pJiinFbg']}
 ];
 
+const projectContacts = {
+  1: {contact: 'Чистякова Вера Павловна', phone: '+7-921-307-67-80'},
+  2: {contact: 'Грачева Ольга Борисовна', phone: '+7-962-721-73-51'},
+  3: {contact: 'Андреева Ольга Николаевна', phone: '+7-981-719-93-67'},
+  4: {contact: 'Борканникова Виктория Викторовна', phone: '+7-921-655-53-49'},
+  5: {contact: 'Власенко Александр Владимирович', phone: '+7-904-604-38-38'},
+  6: {contact: 'Бойкова Нелли Леонидовна', phone: '+7-911-961-92-34'},
+  7: {contact: 'Литвинова Елена Викторовна', phone: '+7-921-325-41-45'},
+  8: {contact: 'Дарья Варламова', phone: '+7-964-380-40-93'},
+  9: {contact: 'Качер Екатерина Борисовна', phone: '+7-921-587-24-54'},
+  10: {contact: 'Тумашик Полина Сергеевна', phone: '+7-905-201-71-86'},
+  11: {contact: 'Куплинов Владислав Алексеевич', phone: '+7-999-175-61-26'},
+  12: {contact: 'Макарова Наталия Евгеньевна', phone: '+7-931-583-55-09'}
+};
+
+projects.forEach(project => {
+  Object.assign(project, projectContacts[project.id]);
+});
+
 const formatMoney = value => new Intl.NumberFormat('ru-RU', {style:'currency',currency:'RUB',maximumFractionDigits:value % 1 ? 2 : 0}).format(value);
 const categories = ['Все', ...new Set(projects.map(p => p.category))];
 const state = { category:'Все', query:'', shortlist:new Set(JSON.parse(localStorage.getItem('nkoShortlist') || '[]')), shortlistOnly:false };
@@ -42,15 +61,29 @@ function filtered(){ const q=state.query.trim().toLowerCase(); return projects.f
 function render(){ const items=filtered(); grid.innerHTML=items.map(card).join(''); document.getElementById('resultsMeta').textContent=`Показано проектов: ${items.length} из ${projects.length}`; document.getElementById('emptyState').hidden=items.length>0; updateCount(); renderFilters(); document.getElementById('shortlistButton').setAttribute('aria-pressed',state.shortlistOnly); document.getElementById('shortlistButton').classList.toggle('active',state.shortlistOnly); }
 function toggleSave(id){ state.shortlist.has(id)?state.shortlist.delete(id):state.shortlist.add(id); persist(); render(); const openId=Number(modal.dataset.project); if(!modal.hidden && openId===id) openProject(id); }
 function openProject(id){ const p=projects.find(x=>x.id===id); if(!p)return; modal.dataset.project=id; document.getElementById('modalContent').innerHTML=`
-  <div class="modal-visual"><img src="${projectImage(p)}" alt="Материалы проекта «${p.title}»"></div>
-  <p class="modal-kicker"><span>Проект ${String(p.id).padStart(2,'0')}</span><span class="tag">${p.category}</span></p>
-  <h2 id="modalTitle">${p.title}</h2><p class="modal-territory">${p.territory}</p>
-  <p class="modal-lead">${p.description}</p><section class="benefit"><h3>Что получает бизнес</h3><p>${p.benefit}</p></section>
-  <div class="detail-grid"><section class="detail-block"><h3>Запрашиваемая сумма</h3><p class="big">${formatMoney(p.budget)}</p></section><section class="detail-block"><h3>Организация</h3><p>${p.org}</p></section><section class="detail-block full"><h3>На что нужны средства</h3><p>${p.costs}</p></section></div>
-  <div class="links"><a class="resource-link" href="${p.presentation}">Открыть презентацию →</a><a class="resource-link secondary" href="${p.post}">Пост о проекте →</a>${p.media.map((u,i)=>`<a class="resource-link secondary" href="${u}">${p.media.length>1?'Материал '+(i+1):'Фото и видео'} →</a>`).join('')}</div>
-  <button class="modal-save" type="button" data-save="${p.id}">${state.shortlist.has(p.id)?'★ В моём выборе':'☆ Добавить в мой выбор'}</button>`;
-  modal.hidden=false; document.body.classList.add('modal-open'); setTimeout(()=>document.querySelector('.modal-close').focus(),0); }
+<div class="modal-visual"><img src="${projectImage(p)}" alt="Материалы проекта «${p.title}»"></div>
+<p class="modal-kicker"><span>Проект ${String(p.id).padStart(2,'0')}</span><span class="tag">${p.category}</span></p>
+<h2 id="modalTitle">${p.title}</h2><p class="modal-territory">${p.territory}</p>
+<p class="modal-lead">${p.description}</p><section class="benefit"><h3>Что получает бизнес</h3><p>${p.benefit}</p></section>
+<div class="detail-grid"><section class="detail-block"><h3>Запрашиваемая сумма</h3><p class="big">${formatMoney(p.budget)}</p></section><section class="detail-block"><h3>Организация</h3><p>${p.org}</p></section><section class="detail-block full"><h3>На что нужны средства</h3><p>${p.costs}</p></section></div>
+${p.contact && p.phone ? `<section class="project-contact">
+<div class="project-contact-item"><span class="project-contact-label">Контактное лицо</span><div class="project-contact-person"><svg class="project-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path></svg><span class="project-contact-name">${p.contact}</span></div></div>
+<div class="project-contact-separator"></div>
+<div class="project-contact-item project-contact-phone"><span class="project-contact-label">Телефон</span><a href="${phoneLink(p.phone)}"><svg class="project-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-3 2c1.5 3 3.5 5 6.5 6.5l2-3 5 2v4c0 .8-.7 1.5-1.5 1.5C10.1 22 2 13.9 2 4.5 2 3.7 2.7 3.5 3H5z"></path></svg>${p.phone}</a></div>
+</section>` : ''}
+<div class="links"><a class="resource-link" href="${p.presentation}">Открыть презентацию →</a><a class="resource-link secondary" href="${p.post}">Пост о проекте →</a>${(p.media||[]).map((u,i)=>`<a class="resource-link secondary" href="${u}">${p.media.length>1?'Материал '+(i+1):'Фото и видео'} →</a>`).join('')}</div>
+<button class="modal-save" type="button" data-save="${p.id}">${state.shortlist.has(p.id)?'★ В моём выборе':'☆ Добавить в мой выбор'}</button>`;
+modal.hidden=false; document.body.classList.add('modal-open'); setTimeout(()=>document.querySelector('.modal-close').focus(),0); }
 function closeModal(){ modal.hidden=true; document.body.classList.remove('modal-open'); delete modal.dataset.project; }
+function phoneLink(phone) {
+  let digits = String(phone).replace(/\D/g, '');
+
+  if (digits.length === 11 && digits.startsWith('8')) {
+    digits = '7' + digits.slice(1);
+  }
+
+  return `tel:+${digits}`;
+}
 
 filters.addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(!b)return;state.category=b.dataset.category;render();});
 grid.addEventListener('click',e=>{const s=e.target.closest('[data-save]');if(s){toggleSave(Number(s.dataset.save));return;}const o=e.target.closest('[data-open]');if(o){openProject(Number(o.dataset.open));return;}const card=e.target.closest('[data-card-open]');if(card)openProject(Number(card.dataset.cardOpen));});
