@@ -96,6 +96,17 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 28px
 .resource-link.secondary { background: white; color: var(--ink); border: 1px solid var(--line); }
 .modal-save { width: 100%; margin-top: 24px; padding: 14px; border: 0; border-radius: 12px; background: var(--lime); font-weight: 850; cursor: pointer; }
 body.modal-open { overflow: hidden; }
+.project-contact { display:grid; grid-template-columns:1fr 1px 1fr; align-items:center; gap:30px; margin-top:28px; padding:22px 24px; background:#fff; border:1px solid var(--line); border-radius:14px; }
+.project-contact-item { min-width:0; }
+.project-contact-label { display:block; margin-bottom:10px; color:var(--muted); font-size:0.82rem; font-weight:600; }
+.project-contact-person { display:flex; align-items:center; gap:12px; }
+.project-contact-name { color:var(--ink); font-size:1.05rem; font-weight:750; line-height:1.3; }
+.project-contact-icon { width:24px; height:24px; flex:0 0 24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; color:var(--ink); }
+.project-contact-separator { width:1px; height:48px; background:var(--line); }
+.project-contact-phone a { display:flex; align-items:center; gap:12px; width:fit-content; color:var(--orange); font-size:1.08rem; font-weight:850; text-decoration:none; transition:opacity .2s ease; }
+.project-contact-phone a .project-contact-icon { color:var(--orange); }
+.project-contact-phone a:hover { opacity:.72; }
+
 @media (max-width: 980px) { .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .intro { grid-template-columns: 1fr; min-height: auto; } .intro-note { max-width: 520px; padding-left: 0; } .closing { grid-template-columns: 1fr; gap: 24px; } }
-@media (max-width: 680px) { .topbar { padding: 10px 16px; } .brand span:last-child { display: none; } .intro { padding: 70px 20px 54px; } h1 { font-size: clamp(2.8rem, 14vw, 4.4rem); } .lead { margin-top: 24px; } .catalog { padding: 64px 16px 70px; } .catalog-head { align-items: stretch; flex-direction: column; } .search { width: 100%; } .project-grid { grid-template-columns: 1fr; } .project-card { min-height: 440px; } .closing { margin: 0 16px 48px; border-radius: 20px; } footer { flex-direction: column; padding: 24px 16px; } .modal { padding: 0; place-items: stretch; } .modal-panel { width: 100%; height: 100%; max-height: none; padding: 20px; border-radius: 0; } .modal-visual { margin: -20px -20px 24px; height: 330px; } .detail-grid { grid-template-columns: 1fr; } .detail-block.full { grid-column: auto; } }
+@media (max-width: 680px) { .topbar { padding: 10px 16px; } .brand span:last-child { display: none; } .intro { padding: 70px 20px 54px; } h1 { font-size: clamp(2.8rem, 14vw, 4.4rem); } .lead { margin-top: 24px; } .catalog { padding: 64px 16px 70px; } .catalog-head { align-items: stretch; flex-direction: column; } .search { width: 100%; } .project-grid { grid-template-columns: 1fr; } .project-card { min-height: 440px; } .closing { margin: 0 16px 48px; border-radius: 20px; } footer { flex-direction: column; padding: 24px 16px; } .modal { padding: 0; place-items: stretch; } .modal-panel { width: 100%; height: 100%; max-height: none; padding: 20px; border-radius: 0; } .modal-visual { margin: -20px -20px 24px; height: 330px; } .detail-grid { grid-template-columns: 1fr; } .detail-block.full { grid-column: auto; } .project-contact { grid-template-columns:1fr; gap:20px; padding:20px; } .project-contact-separator { width:100%; height:1px; } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
